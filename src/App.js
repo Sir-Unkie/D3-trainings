@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import styles from './App.module.scss';
+import { useEffect } from 'react';
+
+const URL = `https://gist.githubusercontent.com/Sir-Unkie/8e7a83acaab32c3f6aa6224aea3c3b6c/raw/Rawdata.csv`;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  useEffect(() => {
+    const fetchData = async URL => {
+      try {
+        const response = await fetch(URL);
+        const data = await response.text();
+        console.log(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData(URL);
+  }, []);
+  return <div className={styles.App}></div>;
 }
 
 export default App;
